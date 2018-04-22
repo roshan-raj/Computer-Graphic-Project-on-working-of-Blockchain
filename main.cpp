@@ -3,53 +3,57 @@
 #include<GL/glu.h>
 #include<stdio.h>
 #include<math.h>
+#include<dos.h>
 #include<stdlib.h>
 #include<string.h>
 #define DEG2RAD 3.14159/180.0
 
-char *str1 = "MANGALORE INSTITUTE OF TECHNOLOGY & ENGINEERING";
-char *str2 = "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING";
-char *str3 = "COMPUTER GRAPHICS AND VISUALIZATION LABORATORY";
-char *str4 = "A MINI PROJECT";
-char *str5 = "ON";
-char *str6 = "WORKING OF BLOCKCHAIN";
-char *str7 = "Submitted By:";
-char *str8 = "ROSHAN RAJ - 4MT15CS117";
-char *str9 = "SURESH PRABHU - 4MT15CS107";
-char *str10 = "Submitted to:";
-char *str11 = "MR. SUNIL KUMAR S";
-char *str12 = "MR. PRASHANTH B.S";
-char *str13 = "********************************************* MENU *********************************************";
-char *str14 = "Press (1) : Create a Block";
-char *str15 = "Press (2) : Tamper with a Block";
-char *str16 = "Press (3) : Distribution of a Block";
-char *str17 = "Press (4) : Display a Block Chain";
-char *str18 = "Press 'Esc' to Exit.";
-char *str19 = "************************************************************************************************";
-char *str20 = "Thank You!";
-char *str21 = "CREATION OF A BLOCK";
-char *str22 = "Cryptographic Hash of the previous block";
-char *str23 = "A Time stamp";
-char *str24 = "Transaction Data";
-char *str25 = "A block records some or all of the most recent Bitcoin transactions that have not yet entered any prior blocks. Thus a block";
-char *str26 = "is like a page of a ledger or record book. Each time a block is 'completed', it gives way to the next block in the blockchain.";
-char *str27 = "------------->";
-char *str28 = "( Press (0) to go back to the Menu )";
-char *str29 = "TAMPER WITH A BLOCK";
-char *str30 = "Hash: ";
-char *str31 = "Previous Hash: ";
-char *str32 = "1Z8F";
-char *str33 = "0000";
-char *str34 = "6BQ1";
-char *str35 = "3H4Q";
-char *str36 = "H62Y";
-char *str37 = "Uh thats not right??!";
-char *str38 = "Here we have a chain of 3 blocks. As you can see, each block has a hash and hash of the previous block.";
-char *str39 = "So, block number 3 points to block number 2, and number 2 points to number 1.";
-char *str40 = "1st block is special. It cannot point to previous block because it's the first one. We call this block, `The Genesis Block`.";
-char *str41 = "1";
-char *str42 = "2";
-char *str43 = "3";
+int flag =1;
+
+char str1[] = "MANGALORE INSTITUTE OF TECHNOLOGY & ENGINEERING";
+char str2[] = "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING";
+char str3[] = "COMPUTER GRAPHICS AND VISUALIZATION LABORATORY";
+char str4[] = "A MINI PROJECT";
+char str5[] = "ON";
+char str6[] = "WORKING OF BLOCKCHAIN";
+char str7[] = "Submitted By:";
+char str8[] = "ROSHAN RAJ - 4MT15CS117";
+char str9[] = "SURESH PRABHU - 4MT15CS107";
+char str10[] = "Submitted To:";
+char str11[] = "MR. SUNIL KUMAR S";
+char str12[] = "MR. PRASHANTH B.S";
+char strl2[] = "( Press Enter to Continue )";
+char str13[] = "********************************************* MENU *********************************************";
+char str14[] = "Press (1) : Create a Block";
+char str15[] = "Press (2) : Tamper with a Block";
+char str16[] = "Press (3) : Distribution of a Block";
+char str17[] = "Press (4) : Display a Block Chain";
+char str18[] = "Press 'ESC' to Exit.";
+char str19[] = "************************************************************************************************";
+char str20[] = "Thank You!";
+char str21[] = "CREATION OF A BLOCK";
+char str22[] = "Cryptographic Hash of the previous block";
+char str23[] = "A Time stamp";
+char str24[] = "Transaction Data";
+char str25[] = "A block records some or all of the most recent Bitcoin transactions that have not yet entered any prior blocks. Thus a block";
+char str26[] = "is like a page of a ledger or record book. Each time a block is 'completed', it gives way to the next block in the blockchain.";
+char str27[] = "------------->";
+char str28[] = "( Press (0) to go back to the Menu )";
+char str29[] = "TAMPER WITH A BLOCK";
+char str30[] = "Hash: ";
+char str31[] = "Previous Hash: ";
+char str32[] = "1Z8F";
+char str33[] = "0000";
+char str34[] = "6BQ1";
+char str35[] = "3H4Q";
+char str36[] = "H62Y";
+char str37[] = "Uh thats not right??!";
+char str38[] = "Here we have a chain of 3 blocks. As you can see, each block has a hash and hash of the previous block.";
+char str39[] = "So, block number 3 points to block number 2, and number 2 points to number 1.";
+char str40[] = "1st block is special. It cannot point to previous block because it's the first one. We call this block, `The Genesis Block`.";
+char str41[] = "1";
+char str42[] = "2";
+char str43[] = "3";
 void *font = GLUT_BITMAP_HELVETICA_18;
 void myKey(unsigned char key, int x, int y);
 
@@ -83,9 +87,11 @@ void display1()
 	glLoadIdentity();
 	gluOrtho2D(-10, 10, -10, 10);
 	glColor3f(1, 1, 1); // foreground color
+
 	glRasterPos2f(-5.06, 7);
 	for (i = 0;i < strlen(str1);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str1[i]); //MITE
+
 	glRasterPos2f(-5, 6);
 	for (i = 0;i<strlen(str2);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str2[i]); //DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING
@@ -119,6 +125,10 @@ void display1()
 	glRasterPos2f(5.5, -7);
 	for (i = 0;i<strlen(str12);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str12[i]);
+    glColor3f(1.0,0.0,0.0);
+    glRasterPos2f(-1.75,-9);
+    for (i = 0;i<strlen(strl2);i++)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, strl2[i]);
 	glutKeyboardFunc(myKey);
 	glFlush();
 
@@ -154,6 +164,8 @@ void display2()
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]);
 	glutKeyboardFunc(myKey); //Take user input for the menu
 	glFlush();
+	if(flag==0)
+        display4intermediate();
 }
 
 void myKey(unsigned char key, int x, int y) {
@@ -171,12 +183,17 @@ void myKey(unsigned char key, int x, int y) {
 		glEnd();
 		glFlush();
 	}
-    if (key == '2') //option 2 is chosen from the Menu
-	{
+    if (key == '2') { //option 2 is chosen from the Menu
 		glutDisplayFunc(display4);
 		display4();
 		glEnd();
 		glFlush();
+	}
+	if (key == '3') {
+        glutDisplayFunc(display4intermediate);
+        display4intermediate();
+        glEnd();
+        glFlush();
 	}
 	if (key == (char)27) //Exit the Project
 	{
@@ -196,6 +213,18 @@ void myKey(unsigned char key, int x, int y) {
 	}
 }
 
+/*
+void ProcessMenu(int id) {
+    if(id == 1)
+        display4intermediate();
+    glutPostRedisplay();
+}
+
+void MouseMenu() {
+    int menu = glutCreateMenu(ProcessMenu);
+    glutAddMenuEntry("Tamper Block",1);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+} */
 // Option 1 screen
 void display3() {
 	glClearColor(1, 1, 1, 1); //background color of the screen
@@ -448,6 +477,7 @@ void display3() {
 
 void display4()
 {
+    if(flag==1){
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT);
 	glRasterPos2f(-8.5, 7);
@@ -465,7 +495,7 @@ void display4()
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
 //1st block
-	//left-side
+//Left-side
 	glBegin(GL_QUADS);
 	glColor3f(0.196078, 0.6, 0.8);//skyblue
 	glVertex2f(-8.5, 1);
@@ -473,8 +503,7 @@ void display4()
 	glVertex2f(-7, 3);
 	glVertex2f(-8.5, 4);
 	glEnd();
-
-	//top-side
+//Top-side
 	glBegin(GL_QUADS);
 	glColor3f(0.196078, 0.6, 0.8);//skyblue
 	glVertex2f(-8.5, 4);
@@ -482,8 +511,7 @@ void display4()
 	glVertex2f(-5.5, 4);
 	glVertex2f(-7, 5);
 	glEnd();
-
-	//right-side
+//Right-side
 	glBegin(GL_QUADS);
 	glColor3f(0.196078, 0.6, 0.8);//skyblue
 	glVertex2f(-7, 0);
@@ -491,8 +519,7 @@ void display4()
 	glVertex2f(-5.5, 4);
 	glVertex2f(-7, 3);
 	glEnd();
-
-	//cube border
+//Cube border
 	glColor3f(0, 0, 0);
 	glBegin(GL_LINES);
 	glVertex2f(-8.5, 4);
@@ -539,7 +566,7 @@ void display4()
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
 //2nd block
-	//left-side
+//Left-side
 	glBegin(GL_QUADS);
 	glColor3f(0.96, 0.80, 0.69);//flesh
 	glVertex2f(-1.5, 1);
@@ -547,8 +574,7 @@ void display4()
 	glVertex2f(0, 3);
 	glVertex2f(-1.5, 4);
 	glEnd();
-
-	//top-side
+//Top-side
 	glBegin(GL_QUADS);
 	glColor3f(0.96, 0.80, 0.69);//flesh
 	glVertex2f(-1.5, 4);
@@ -556,8 +582,7 @@ void display4()
 	glVertex2f(1.5, 4);
 	glVertex2f(0, 5);
 	glEnd();
-
-	//right-side
+//Right-side
 	glBegin(GL_QUADS);
 	glColor3f(0.96, 0.80, 0.69);//flesh
 	glVertex2f(0, 0);
@@ -565,8 +590,7 @@ void display4()
 	glVertex2f(1.5, 4);
 	glVertex2f(0, 3);
 	glEnd();
-
-	//cube border
+//Cube border
 	glColor3f(0, 0, 0);
 	glBegin(GL_LINES);
 	glVertex2f(-1.5, 4);
@@ -613,7 +637,7 @@ void display4()
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
 //3rd block
-	//left-side
+//Left-side
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.5, 0);//orange
 	glVertex2f(8.5, 1);
@@ -621,8 +645,7 @@ void display4()
 	glVertex2f(7, 3);
 	glVertex2f(8.5, 4);
 	glEnd();
-
-	//top-side
+//Top-side
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.5, 0);//orange
 	glVertex2f(8.5, 4);
@@ -630,8 +653,7 @@ void display4()
 	glVertex2f(5.5, 4);
 	glVertex2f(7, 5);
 	glEnd();
-
-	//right-side
+//Right-side
 	glBegin(GL_QUADS);
 	glColor3f(1, 0.5, 0);//orange
 	glVertex2f(7, 0);
@@ -639,8 +661,7 @@ void display4()
 	glVertex2f(5.5, 4);
 	glVertex2f(7, 3);
 	glEnd();
-
-	//cube border
+//Cube border
 	glColor3f(0, 0, 0);
 	glBegin(GL_LINES);
 	glVertex2f(8.5, 4);
@@ -686,7 +707,7 @@ void display4()
 
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
-	//chain line
+//Chain line
 	glBegin(GL_LINES);
 	glVertex2f(-5.5, 2.5);
 	glVertex2f(-1.5, 2.5);
@@ -790,7 +811,7 @@ void display4()
 
 	glRasterPos2f(-8.5, -7);
 	for (i = 0;i<strlen(str38);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str38[i]); //Here we have a chain of 3 blocks. As you can see, each block has a hash and hash of the previous block.
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str38[i]); //Here we have a chain of 3 blocks...
 	glFlush();
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 20000; j++); //delay
 
@@ -841,11 +862,11 @@ void display4()
 	glEnd();
 
 	glRasterPos2f(0, 0);
-
 	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
-
-	display4intermediate();
-
+	//display4intermediate();
+	flag = 0;
+	display2();
+    }
 }
 
 void display4intermediate()
@@ -1163,16 +1184,16 @@ void display4intermediate()
 	for (i = 0;i<strlen(str35);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
 	glFlush();
-
+    flag = 1;
 }
 int main(int argc, char **argv)
 {
 	int window;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-	glutInitWindowPosition(70, 100);
+	//glutInitWindowPosition(70, 100);
 	glutCreateWindow("Working of BlockChain");
 	glutFullScreen();
-	glutDisplayFunc(display1); //call first page function
+	glutDisplayFunc(display1); //Call the First Page function
 	glutMainLoop();
 }
