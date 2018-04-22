@@ -1,1 +1,1 @@
-This is a Readme.
+Demonsttration of Blockchain using Graphic System. 
