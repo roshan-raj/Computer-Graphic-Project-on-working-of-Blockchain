@@ -8,8 +8,6 @@
 #include<string.h>
 #define DEG2RAD 3.14159/180.0
 
-int flag =1;
-
 char str1[] = "MANGALORE INSTITUTE OF TECHNOLOGY & ENGINEERING";
 char str2[] = "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING";
 char str3[] = "COMPUTER GRAPHICS AND VISUALIZATION LABORATORY";
@@ -38,7 +36,7 @@ char str24[] = "Transaction Data";
 char str25[] = "A block records some or all of the most recent Bitcoin transactions that have not yet entered any prior blocks. Thus a block";
 char str26[] = "is like a page of a ledger or record book. Each time a block is 'completed', it gives way to the next block in the blockchain.";
 char str27[] = "------------->";
-char str28[] = "( Press (0) to go back to the Menu )";
+char str28[] = "( Press ENTER to go back to the Menu )";
 char str29[] = "TAMPER WITH A BLOCK";
 char str30[] = "Hash: ";
 char str31[] = "Previous Hash: ";
@@ -63,8 +61,7 @@ void display3();
 void display4();
 void display4intermediate();
 
-void DrawEllipse(float x, float y, float radiusX, float radiusY)
-{
+void DrawEllipse(float x, float y, float radiusX, float radiusY) {
 	int i;
 	glTranslatef(x,y,0.0f);
 	glBegin(GL_LINE_LOOP);
@@ -75,9 +72,7 @@ void DrawEllipse(float x, float y, float radiusX, float radiusY)
 	}
 	glEnd();
 }
-
 int i;
-
 //Main Screen : DETAILS
 void display1()
 {
@@ -164,8 +159,6 @@ void display2()
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]);
 	glutKeyboardFunc(myKey); //Take user input for the menu
 	glFlush();
-	if(flag==0)
-        display4intermediate();
 }
 
 void myKey(unsigned char key, int x, int y) {
@@ -477,7 +470,6 @@ void display3() {
 
 void display4()
 {
-    if(flag==1){
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT);
 	glRasterPos2f(-8.5, 7);
@@ -863,14 +855,13 @@ void display4()
 
 	glRasterPos2f(0, 0);
 	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
-	//display4intermediate();
-	flag = 0;
-	display2();
-    }
+	display4intermediate();
 }
-
 void display4intermediate()
 {
+    glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10, 10, -10, 10);
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -1184,14 +1175,12 @@ void display4intermediate()
 	for (i = 0;i<strlen(str35);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
 	glFlush();
-    flag = 1;
 }
 int main(int argc, char **argv)
 {
 	int window;
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-	//glutInitWindowPosition(70, 100);
 	glutCreateWindow("Working of BlockChain");
 	glutFullScreen();
 	glutDisplayFunc(display1); //Call the First Page function
