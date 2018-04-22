@@ -5,6 +5,7 @@
 #include<math.h>
 #include<stdlib.h>
 #include<string.h>
+#define DEG2RAD 3.14159/180.0
 
 char *str1 = "MANGALORE INSTITUTE OF TECHNOLOGY & ENGINEERING";
 char *str2 = "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING";
@@ -34,18 +35,44 @@ char *str25 = "A block records some or all of the most recent Bitcoin transactio
 char *str26 = "is like a page of a ledger or record book. Each time a block is 'completed', it gives way to the next block in the blockchain.";
 char *str27 = "------------->";
 char *str28 = "( Press (0) to go back to the Menu )";
+char *str29 = "TAMPER WITH A BLOCK";
+char *str30 = "Hash: ";
+char *str31 = "Previous Hash: ";
+char *str32 = "1Z8F";
+char *str33 = "0000";
+char *str34 = "6BQ1";
+char *str35 = "3H4Q";
+char *str36 = "H62Y";
+char *str37 = "Uh thats not right??!";
+char *str38 = "Here we have a chain of 3 blocks. As you can see, each block has a hash and hash of the previous block.";
+char *str39 = "So, block number 3 points to block number 2, and number 2 points to number 1.";
+char *str40 = "1st block is special. It cannot point to previous block because it's the first one. We call this block, `The Genesis Block`.";
+char *str41 = "1";
+char *str42 = "2";
+char *str43 = "3";
 void *font = GLUT_BITMAP_HELVETICA_18;
 void myKey(unsigned char key, int x, int y);
 
-void display1();    //Main Screen : DETAILS
+void display1();
 void display2();
 void display3();
+void display4();
+void display4intermediate();
+
+void DrawEllipse(float x, float y, float radiusX, float radiusY)
+{
+	int i;
+	glTranslatef(x,y,0.0f);
+	glBegin(GL_LINE_LOOP);
+	for (i = 0;i < 360;i++)
+	{
+		float rad = i*DEG2RAD;
+		glVertex2f(cos(rad)*radiusX, sin(rad)*radiusY);
+	}
+	glEnd();
+}
 
 int i;
-
-void delay() {
-	for (int i = 0;i<100000;i++)for (int j = 0;j<10000;j++) {}
-}
 
 //Main Screen : DETAILS
 void display1()
@@ -106,28 +133,27 @@ void display2()
 	glColor3f(0, 0, 0); // foreground color
 	glRasterPos2f(-8.5, 7);
 	for (i = 0;i<strlen(str13);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str13[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str13[i]);
 	glRasterPos2f(-3, 4);
 	for (i = 0;i<strlen(str14);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str14[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str14[i]);
 	glRasterPos2f(-3, 2);
 	for (i = 0;i<strlen(str15);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str15[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str15[i]);
 	glRasterPos2f(-3, 0);
 	for (i = 0;i<strlen(str16);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str16[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str16[i]);
 	glRasterPos2f(-3, -2);
 	for (i = 0;i<strlen(str17);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str17[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str17[i]);
 	glRasterPos2f(-3, -4);
 	for (i = 0;i<strlen(str18);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str18[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str18[i]);
 	glRasterPos2f(-8.5, -7);
 	for (i = 0;i<strlen(str19);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]); //
-	glutKeyboardFunc(myKey); //take user input for the menu
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]);
+	glutKeyboardFunc(myKey); //Take user input for the menu
 	glFlush();
-
 }
 
 void myKey(unsigned char key, int x, int y) {
@@ -145,7 +171,14 @@ void myKey(unsigned char key, int x, int y) {
 		glEnd();
 		glFlush();
 	}
-	if (key == (char)27)
+    if (key == '2') //option 2 is chosen from the Menu
+	{
+		glutDisplayFunc(display4);
+		display4();
+		glEnd();
+		glFlush();
+	}
+	if (key == (char)27) //Exit the Project
 	{
 
 		glClearColor(1, 1, 1, 0); //background color
@@ -163,8 +196,7 @@ void myKey(unsigned char key, int x, int y) {
 	}
 }
 
-
-// option 1 screen
+// Option 1 screen
 void display3() {
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -408,13 +440,731 @@ void display3() {
 	glRasterPos2f(-2.5, -9);
 	for (i = 0;i<strlen(str28);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str28[i]); //
+	glutKeyboardFunc(myKey);
 	glFlush();
+	glutKeyboardFunc(myKey);
 
-	for (int i = 0; i < 50000; i++) for (int j = 0; j < 50000; j++); //delay
-	display2(); //goes back to the menu after some time
 }
 
+void display4()
+{
+	glClearColor(1, 1, 1, 1); //background color of the screen
+	glClear(GL_COLOR_BUFFER_BIT);
+	glRasterPos2f(-8.5, 7);
+	for (i = 0;i<strlen(str19);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]); //
+	glFlush();
 
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(-2, 8);
+	for (i = 0;i<strlen(str29);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str29[i]); //TAMPER WITH A BLOCK
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+//1st block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-8.5, 1);
+	glVertex2f(-7, 0);
+	glVertex2f(-7, 3);
+	glVertex2f(-8.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 3);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-7, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-7, 0);
+	glVertex2f(-5.5, 1);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-7, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-8.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 3);
+	glVertex2f(-7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 1);
+	glVertex2f(-7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 0);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 3);
+	glVertex2f(-5.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 5);
+	glVertex2f(-5.5, 4);
+	glEnd();
+
+	glRasterPos2f(-7, 4);
+	for (i = 0;i<strlen(str41);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str41[i]); //1
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+//2nd block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-1.5, 1);
+	glVertex2f(0, 0);
+	glVertex2f(0, 3);
+	glVertex2f(-1.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 3);
+	glVertex2f(1.5, 4);
+	glVertex2f(0, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glVertex2f(1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(-1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(1.5, 4);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 1);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(1.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 5);
+	glVertex2f(1.5, 4);
+	glEnd();
+
+	glRasterPos2f(0, 4);
+	for (i = 0;i<strlen(str42);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str42[i]); //2
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+//3rd block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(8.5, 1);
+	glVertex2f(7, 0);
+	glVertex2f(7, 3);
+	glVertex2f(8.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 3);
+	glVertex2f(5.5, 4);
+	glVertex2f(7, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(7, 0);
+	glVertex2f(5.5, 1);
+	glVertex2f(5.5, 4);
+	glVertex2f(7, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(8.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 3);
+	glVertex2f(7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, 4);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 1);
+	glVertex2f(7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 0);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 3);
+	glVertex2f(5.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 5);
+	glVertex2f(5.5, 4);
+	glEnd();
+
+	glRasterPos2f(7, 4);
+	for (i = 0;i<strlen(str43);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str43[i]); //3
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	//chain line
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 2.5);
+	glVertex2f(-1.5, 2.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(1.5, 2.5);
+	glVertex2f(5.5, 2.5);
+	glEnd();
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	//line-divider
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3.5, -5);
+	glEnd();
+
+	//line-divider
+	glBegin(GL_LINES);
+	glVertex2f(3.5, -1);
+	glVertex2f(3.5, -5);
+	glEnd();
+
+	glFlush();
+
+	glRasterPos2f(-8.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(-8.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	glRasterPos2f(-2.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(-2.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	glRasterPos2f(4.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(4.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	glRasterPos2f(-5.5, -2);
+	for (i = 0;i<strlen(str32);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str32[i]); //1Z8F
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(-5.5, -4);
+	for (i = 0;i<strlen(str33);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str33[i]); //0000
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(1.5, -2);
+	for (i = 0;i<strlen(str35);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(1.5, -4);
+	for (i = 0;i<strlen(str32);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str32[i]); //1Z8F
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(7.5, -2);
+	for (i = 0;i<strlen(str36);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str36[i]); //H62Y
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(7.5, -4);
+	for (i = 0;i<strlen(str35);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+
+	glRasterPos2f(-8.5, -7);
+	for (i = 0;i<strlen(str38);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str38[i]); //Here we have a chain of 3 blocks. As you can see, each block has a hash and hash of the previous block.
+	glFlush();
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 20000; j++); //delay
+
+	DrawEllipse(8, -4, 1, 0.75); //3rd block hash circle
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+	DrawEllipse(-6, 2, 1, 0.75); //2nd block hash circle
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+	//3rd to 2nd arrow
+	glBegin(GL_LINES);
+	glVertex2f(5, -2);
+	glVertex2f(1, 0);
+	glEnd();
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(-10.5, -6);
+	for (i = 0;i<strlen(str39);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str39[i]); //So, block number 3 points to block number 2, and number 2 points to number 1.
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	DrawEllipse(0, -2, 1, 0.75); //2nd block previous hash circle
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	DrawEllipse(-7, 2, 1, 0.75); //1st block previous hash circle
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	//3rd to 2nd arrow
+	glBegin(GL_LINES);
+	glVertex2f(6, -2);
+	glVertex2f(1, 0);
+	glEnd();
+
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	glRasterPos2f(-3.5, -7);
+	for (i = 0;i<strlen(str40);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str40[i]); //1st block is special. It cannot point to previous block because it's the first one. We call this block, `The Genesis Block`.
+	glFlush();
+
+	//underline
+	glBegin(GL_LINES);
+	glColor3f(0, 1, 0);
+	glVertex2f(-0.75, -2.25);
+	glVertex2f(0.5, -2.25);
+	glEnd();glBegin(GL_LINES);
+	glColor3f(0, 1, 0);
+	glVertex2f(-0.75, -2.45);
+	glVertex2f(0.5, -2.45);
+	glEnd();
+
+	glRasterPos2f(0, 0);
+
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	display4intermediate();
+
+}
+
+void display4intermediate()
+{
+	glClearColor(1, 1, 1, 1); //background color of the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glRasterPos2f(-8.5, 7);
+	for (i = 0;i<strlen(str19);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]); //
+	glFlush();
+
+	glRasterPos2f(-2, 8);
+	for (i = 0;i<strlen(str29);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str29[i]); //TAMPER WITH A BLOCK
+	glFlush();
+
+//1st block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-8.5, 1);
+	glVertex2f(-7, 0);
+	glVertex2f(-7, 3);
+	glVertex2f(-8.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 3);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-7, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-7, 0);
+	glVertex2f(-5.5, 1);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-7, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-8.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 3);
+	glVertex2f(-7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 4);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 1);
+	glVertex2f(-7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 0);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 3);
+	glVertex2f(-5.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8.5, 4);
+	glVertex2f(-7, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 5);
+	glVertex2f(-5.5, 4);
+	glEnd();
+
+	glRasterPos2f(-7, 4);
+	for (i = 0;i<strlen(str41);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str41[i]); //1
+	glFlush();
+
+//2nd block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-1.5, 1);
+	glVertex2f(0, 0);
+	glVertex2f(0, 3);
+	glVertex2f(-1.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 3);
+	glVertex2f(1.5, 4);
+	glVertex2f(0, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glVertex2f(1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(-1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(1.5, 4);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 1);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(1.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 5);
+	glVertex2f(1.5, 4);
+	glEnd();
+
+	glRasterPos2f(0, 4);
+	for (i = 0;i<strlen(str42);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str42[i]); //2
+	glFlush();
+
+//3rd block
+	//left-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(8.5, 1);
+	glVertex2f(7, 0);
+	glVertex2f(7, 3);
+	glVertex2f(8.5, 4);
+	glEnd();
+
+	//top-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 3);
+	glVertex2f(5.5, 4);
+	glVertex2f(7, 5);
+	glEnd();
+
+	//right-side
+	glBegin(GL_QUADS);
+	glColor3f(1, 0.5, 0);//orange
+	glVertex2f(7, 0);
+	glVertex2f(5.5, 1);
+	glVertex2f(5.5, 4);
+	glVertex2f(7, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(8.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 3);
+	glVertex2f(7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, 4);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 1);
+	glVertex2f(7, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 0);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 3);
+	glVertex2f(5.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8.5, 4);
+	glVertex2f(7, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 5);
+	glVertex2f(5.5, 4);
+	glEnd();
+
+	glRasterPos2f(7, 4);
+	for (i = 0;i<strlen(str43);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str43[i]); //3
+	glFlush();
+
+	//chain line
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 2.5);
+	glVertex2f(-1.5, 2.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(1.5, 2.5);
+	glVertex2f(5.5, 2.5);
+	glEnd();
+	glFlush();
+
+	//line-divider
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3.5, -5);
+	glEnd();
+
+	//line-divider
+	glBegin(GL_LINES);
+	glVertex2f(3.5, -1);
+	glVertex2f(3.5, -5);
+	glEnd();
+
+	glFlush();
+
+	glRasterPos2f(-8.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(-8.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	glRasterPos2f(-2.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(-2.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	glRasterPos2f(4.5, -2);
+	for (i = 0;i<strlen(str30);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str30[i]); //Hash:
+	glFlush();
+
+	glRasterPos2f(4.5, -4);
+	for (i = 0;i<strlen(str31);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str31[i]); //Previous Hash:
+	glFlush();
+
+	glRasterPos2f(-5.5, -2);
+	for (i = 0;i<strlen(str32);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str32[i]); //1Z8F
+	glFlush();
+
+	glRasterPos2f(-5.5, -4);
+	for (i = 0;i<strlen(str33);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str33[i]); //0000
+	glFlush();
+
+	glRasterPos2f(1.5, -2);
+	for (i = 0;i<strlen(str35);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
+	glFlush();
+
+	glRasterPos2f(1.5, -4);
+	for (i = 0;i<strlen(str32);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str32[i]); //1Z8F
+	glFlush();
+
+	glRasterPos2f(7.5, -2);
+	for (i = 0;i<strlen(str36);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str36[i]); //H62Y
+	glFlush();
+
+	glRasterPos2f(7.5, -4);
+	for (i = 0;i<strlen(str35);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
+	glFlush();
+
+}
 int main(int argc, char **argv)
 {
 	int window;
