@@ -206,7 +206,7 @@ void myKey(unsigned char key, int x, int y) {
 	}
 }
 
-/*
+
 void ProcessMenu(int id) {
     if(id == 1)
         display4intermediate();
@@ -217,7 +217,7 @@ void MouseMenu() {
     int menu = glutCreateMenu(ProcessMenu);
     glutAddMenuEntry("Tamper Block",1);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
-} */
+}
 // Option 1 screen
 void display3() {
 	glClearColor(1, 1, 1, 1); //background color of the screen
@@ -854,8 +854,9 @@ void display4()
 	glEnd();
 
 	glRasterPos2f(0, 0);
-	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
-	display4intermediate();
+	glFlush();
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+	//display4intermediate();
 }
 void display4intermediate()
 {
@@ -1183,6 +1184,7 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutCreateWindow("Working of BlockChain");
 	glutFullScreen();
+	MouseMenu();
 	glutDisplayFunc(display1); //Call the First Page function
 	glutMainLoop();
 }
