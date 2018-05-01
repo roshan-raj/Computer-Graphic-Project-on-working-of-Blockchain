@@ -6,7 +6,7 @@ Demonsttration of Blockchain using Graphic System.
 ```
 sudo apt-get install freeglut3 freeglut3-dev
 ```
-- Clone the repository and CD over to [the main directory](https://github.com/roshan139154/Computer-Graphic-Project-on-working-of-Blockchain), execute the following command
+- Clone the repository and 'cd' over to [the main directory](https://github.com/roshan139154/Computer-Graphic-Project-on-working-of-Blockchain), execute the following command
 
 ```
 $ gcc main.cpp -lGL -lGLU -lglut -lm -o output
