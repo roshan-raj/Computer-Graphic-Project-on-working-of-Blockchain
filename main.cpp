@@ -54,6 +54,7 @@ char str43[] = "3";
 char *str44 = "Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.";
 char *str45 = "In turn, that will make block 3 and all following block invalid because they no longer store a valid hash of the previous block.";
 char *str46 = "So changing a single block will make all following blocks invalid.";
+char *str47 = "DISTRIBUTION OF A BLOCK";
 void *font = GLUT_BITMAP_HELVETICA_18;
 void myKey(unsigned char key, int x, int y);
 
@@ -61,6 +62,7 @@ void display1();
 void display2();
 void display3();
 void display4();
+void display5();
 void display4intermediate();
 
 void DrawEllipse(float x, float y, float radiusX, float radiusY) {
@@ -185,8 +187,8 @@ void myKey(unsigned char key, int x, int y) {
 		glFlush();
 	}
 	if (key == '3') {
-        glutDisplayFunc(display4intermediate);
-        display4intermediate();
+        glutDisplayFunc(display5);
+        display5();
         glEnd();
         glFlush();
 	}
@@ -223,7 +225,7 @@ void MouseMenu() {
 */
 // Option 1 screen
 void display3() {
-     glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-10, 10, -10, 10);
 	glClearColor(1, 1, 1, 1); //background color of the screen
@@ -243,60 +245,44 @@ void display3() {
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
 //hollow cube display begin
-	//back
 	glBegin(GL_LINES);
-	glVertex2f(3, -1);
-	glVertex2f(7, -1);
+	glVertex2f(3, -2);
+	glVertex2f(5, -3);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2f(7, -1);
-	glVertex2f(7, 3);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(7, 3);
-	glVertex2f(3, 3);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(3, 3);
-	glVertex2f(3, -1);
+	glVertex2f(5, -3);
+	glVertex2f(7, -2);
 	glEnd();
 
-	//left
 	glBegin(GL_LINES);
-	glVertex2f(2, -2);
-	glVertex2f(3, -1);
+	glVertex2f(3, -2);
+	glVertex2f(3, 2);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2f(3, 3);
-	glVertex2f(2, 2);
-	glEnd();
-
-	//right
-	glBegin(GL_LINES);
-	glVertex2f(6, -2);
-	glVertex2f(7, -1);
+	glVertex2f(5, -3);
+	glVertex2f(5, 1);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2f(7, 3);
-	glVertex2f(6, 2);
+	glVertex2f(7, -2);
+	glVertex2f(7, 2);
 	glEnd();
 
-	//front
 	glBegin(GL_LINES);
-	glVertex2f(2, -2);
-	glVertex2f(6, -2);
+	glVertex2f(3, 2);
+	glVertex2f(5, 1);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2f(6, -2);
-	glVertex2f(6, 2);
+	glVertex2f(5, 1);
+	glVertex2f(7, 2);
+	glEnd();
+
+	glBegin(GL_LINES);
+	glVertex2f(3, 2);
+	glVertex2f(5, 3);
 	glEnd();
 	glBegin(GL_LINES);
-	glVertex2f(6, 2);
-	glVertex2f(2, 2);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(2, 2);
-	glVertex2f(2, -2);
+	glVertex2f(5, 3);
+	glVertex2f(7, 2);
 	glEnd();
 	glFlush();
 	//hollow cube display end
@@ -336,121 +322,80 @@ void display3() {
 	glFlush();
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
 
-//hollow cube display begin
-	//back
-	glBegin(GL_QUADS);
-	glColor3f(0,1,0);
-	glVertex2f(3, -1);
-	glVertex2f(7, -1);
-	glVertex2f(7, 3);
-	glVertex2f(3, 3);
-	glEnd();
-
+//filled cube display begin
 	//left
 	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex2f(2, -2);
-	glVertex2f(3, -1);
-	glVertex2f(3, 3);
-	glVertex2f(2, 2);
+	glColor3f(0,1,0);//green
+	glVertex2f(3,-2);
+	glVertex2f(5,-3);
+	glVertex2f(5,1);
+	glVertex2f(3,2);
 	glEnd();
 
 	//right
 	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex2f(6, -2);
-	glVertex2f(7, -1);
-	glVertex2f(7, 3);
-	glVertex2f(6, 2);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(5, -3);
+	glVertex2f(7,-2);
+	glVertex2f(7,2);
+	glVertex2f(5,1);
 	glEnd();
 
 	//top
 	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex2f(6, 2);
-	glVertex2f(7, 3);
-	glVertex2f(3, 3);
-	glVertex2f(2, 2);
-	glEnd();
-
-	//bottom
-	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex2f(6, -2);
-	glVertex2f(7, -1);
-	glVertex2f(3, -1);
-	glVertex2f(2, -2);
-	glEnd();
-
-	//front
-	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex2f(2, -2);
-	glVertex2f(6, -2);
-	glVertex2f(6, 2);
-	glVertex2f(2, 2);
-	glEnd();
-
-//hollow cube display end
-//hollow cube display begin
-//back
-	glColor3f(0, 0, 0);
-	glBegin(GL_LINES);
-	glVertex2f(3, -1);
-	glVertex2f(7, -1);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(7, -1);
-	glVertex2f(7, 3);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(7, 3);
-	glVertex2f(3, 3);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(3, 3);
-	glVertex2f(3, -1);
-	glEnd();
-
-	//left
-	glBegin(GL_LINES);
-	glVertex2f(2, -2);
-	glVertex2f(3, -1);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(3, 3);
-	glVertex2f(2, 2);
-	glEnd();
-
-	//right
-	glBegin(GL_LINES);
-	glVertex2f(6, -2);
-	glVertex2f(7, -1);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(7, 3);
-	glVertex2f(6, 2);
-	glEnd();
-
-	//front
-	glBegin(GL_LINES);
-	glVertex2f(2, -2);
-	glVertex2f(6, -2);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(6, -2);
-	glVertex2f(6, 2);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(6, 2);
-	glVertex2f(2, 2);
-	glEnd();
-	glBegin(GL_LINES);
-	glVertex2f(2, 2);
-	glVertex2f(2, -2);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(3,2);
+	glVertex2f(5,1);
+	glVertex2f(7, 2);
+	glVertex2f(5,3);
 	glEnd();
 	glFlush();
-//hollow cube display end
+
+	glColor3f(0, 0, 0);//black
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(3, -2);
+	glVertex2f(5, -3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5, -3);
+	glVertex2f(7, -2);
+	glEnd();
+	glFlush();
+
+	glBegin(GL_LINES);
+	glVertex2f(3, -2);
+	glVertex2f(3, 2);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5, -3);
+	glVertex2f(5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, -2);
+	glVertex2f(7, 2);
+	glEnd();
+
+	glBegin(GL_LINES);
+	glVertex2f(3, 2);
+	glVertex2f(5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5, 1);
+	glVertex2f(7, 2);
+	glEnd();
+
+	glBegin(GL_LINES);
+	glVertex2f(3, 2);
+	glVertex2f(5, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5, 3);
+	glVertex2f(7, 2);
+	glEnd();
+	glFlush();
+
+//filled cube display end
 
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 30000; j++); //delay
@@ -467,11 +412,10 @@ void display3() {
 
 	glRasterPos2f(-2.5, -9);
 	for (i = 0;i<strlen(str28);i++)
-		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str28[i]); //
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str28[i]); // ( Press `ENTER` to continue )
 	glutKeyboardFunc(myKey);
 	glFlush();
 	glutKeyboardFunc(myKey);
-
 }
 
 void display4()
@@ -1286,6 +1230,595 @@ void display4intermediate()
 		for (int i = 0; i < 20000; i++) for (int j = 0; j < 20000; j++); //delay
 
 
+}
+
+void display5()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10, 10, -10, 10);
+	glClearColor(1, 1, 1, 1); //background color of the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(0, 0, 0);
+	glRasterPos2f(-8.5, 7);
+	for (i = 0;i<strlen(str19);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]); //
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glRasterPos2f(-2.25, 8);
+	for (i = 0;i<strlen(str47);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str47[i]); //DISTRIBUTION OF A BLOCK
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+//COMPUTER1
+	//monitor
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);//red
+	glVertex2f(-7, 3);
+	glVertex2f(-5, 3);
+	glVertex2f(-5, 5.5);
+	glVertex2f(-7, 5.5);
+	glEnd();
+
+	//screen
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);//black
+	glVertex2f(-6.9, 3.2);
+	glVertex2f(-5.1, 3.2);
+	glVertex2f(-5.1, 5.3);
+	glVertex2f(-6.9, 5.3);
+	glEnd();
+
+	//keyboard
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);//red
+	glVertex2f(-7, 2.75);
+	glVertex2f(-5, 2.75);
+	glVertex2f(-4.5, 2);
+	glVertex2f(-7.5, 2);
+	glEnd();
+	glFlush();
+
+	//COMPUTER2
+	//monitor
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);//red
+	glVertex2f(5, 3);
+	glVertex2f(7, 3);
+	glVertex2f(7, 5.5);
+	glVertex2f(5, 5.5);
+	glEnd();
+
+	//screen
+	glBegin(GL_QUADS);
+	glColor3f(1, 1, 1);//black
+	glVertex2f(5.1, 3.2);
+	glVertex2f(6.9, 3.2);
+	glVertex2f(6.9, 5.3);
+	glVertex2f(5.1, 5.3);
+	glEnd();
+
+	//keyboard
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 0);//red
+	glVertex2f(5, 2.75);
+	glVertex2f(7, 2.75);
+	glVertex2f(7.5, 2);
+	glVertex2f(4.5, 2);
+	glEnd();
+
+	glFlush();
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+//block1 of computer1
+	 //left
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//Sky blue
+	glVertex2f(-8, -0.5);
+	glVertex2f(-7.5, -1);
+	glVertex2f(-7.5, 0);
+	glVertex2f(-8, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-7.5, 0);
+	glVertex2f(-7.5, -1);
+	glVertex2f(-7, -0.5);
+	glVertex2f(-7, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(-8, 0.5);
+	glVertex2f(-7.5, 0);
+	glVertex2f(-7, 0.5);
+	glVertex2f(-7.5, 1);
+	glEnd();
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(-8, -0.5);
+	glVertex2f(-7.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7.5, -1);
+	glVertex2f(-7.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7.5, 0);
+	glVertex2f(-8, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-8, 0.5);
+	glVertex2f(-8, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7.5, -1);
+	glVertex2f(-7, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, -0.5);
+	glVertex2f(-7, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 0.5);
+	glVertex2f(-7.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7, 0.5);
+	glVertex2f(-7.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-7.5, 1);
+	glVertex2f(-8, 0.5);
+	glEnd();
+	glFlush();
+
+
+//block1 of computer2
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(3, -0.5);
+	glVertex2f(3.5, -1);
+	glVertex2f(3.5, 0);
+	glVertex2f(3, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(3.5, 0);
+	glVertex2f(3.5, -1);
+	glVertex2f(4, -0.5);
+	glVertex2f(4, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0.196078, 0.6, 0.8);//skyblue
+	glVertex2f(3, 0.5);
+	glVertex2f(3.5, 0);
+	glVertex2f(4, 0.5);
+	glVertex2f(3.5, 1);
+	glEnd();
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(3, -0.5);
+	glVertex2f(3.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(3.5, -1);
+	glVertex2f(3.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(3.5, 0);
+	glVertex2f(3, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(3, 0.5);
+	glVertex2f(3, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(3.5, -1);
+	glVertex2f(4, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(4, -0.5);
+	glVertex2f(4, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(4, 0.5);
+	glVertex2f(3.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(4, 0.5);
+	glVertex2f(3.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(3.5, 1);
+	glVertex2f(3, 0.5);
+	glEnd();
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+//block2 of computer1
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-6, -0.5);
+	glVertex2f(-5.5, -1);
+	glVertex2f(-5.5, 0);
+	glVertex2f(-6, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-5.5, 0);
+	glVertex2f(-5.5, -1);
+	glVertex2f(-5, -0.5);
+	glVertex2f(-5, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(-6, 0.5);
+	glVertex2f(-5.5, 0);
+	glVertex2f(-5, 0.5);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glFlush();
+	glColor3f(0, 0, 0);
+
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(-6, -0.5);
+	glVertex2f(-5.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, -1);
+	glVertex2f(-5.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 0);
+	glVertex2f(-6, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-6, 0.5);
+	glVertex2f(-6, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, -1);
+	glVertex2f(-5, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5, -0.5);
+	glVertex2f(-5, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5, 0.5);
+	glVertex2f(-5.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5, 0.5);
+	glVertex2f(-5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-5.5, 1);
+	glVertex2f(-6, 0.5);
+	glEnd();
+	glFlush();
+
+
+//block2 of computer2
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(5, -0.5);
+	glVertex2f(5.5, -1);
+	glVertex2f(5.5, 0);
+	glVertex2f(5, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(5.5, 0);
+	glVertex2f(5.5, -1);
+	glVertex2f(6, -0.5);
+	glVertex2f(6, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0.96, 0.80, 0.69);//flesh
+	glVertex2f(5, 0.5);
+	glVertex2f(5.5, 0);
+	glVertex2f(6, 0.5);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(5, -0.5);
+	glVertex2f(5.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, -1);
+	glVertex2f(5.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, 0);
+	glVertex2f(5, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5, 0.5);
+	glVertex2f(5, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, -1);
+	glVertex2f(6, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(6, -0.5);
+	glVertex2f(6, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(6, 0.5);
+	glVertex2f(5.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(6, 0.5);
+	glVertex2f(5.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(5.5, 1);
+	glVertex2f(5, 0.5);
+	glEnd();
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glBegin(GL_LINES);
+	glVertex2f(-7, 0);
+	glVertex2f(-6, 0);
+	glEnd();
+
+	glBegin(GL_LINES);
+	glVertex2f(4, 0);
+	glVertex2f(5, 0);
+	glEnd();
+
+	glFlush();
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+
+	//The BIG BLOCK
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(-0.5, 3.5);
+	glVertex2f(0.0, 3);
+	glVertex2f(0.0, 4);
+	glVertex2f(-0.5, 4.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(0, 4);
+	glVertex2f(0, 3);
+	glVertex2f(0.5, 3.5);
+	glVertex2f(0.5, 4.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(-0.5, 4.5);
+	glVertex2f(0, 4);
+	glVertex2f(0.5, 4.5);
+	glVertex2f(0, 5);
+	glEnd();
+	glFlush();
+
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(-0.5, 3.5);
+	glVertex2f(0.0, 3.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.0, 3.0);
+	glVertex2f(0.0, 4.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.0, 4.0);
+	glVertex2f(-0.5, 4.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-0.5, 4.5);
+	glVertex2f(-0.5, 3.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.0, 3.0);
+	glVertex2f(0.5, 3.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.5, 3.5);
+	glVertex2f(0.5, 4.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.5, 4.5);
+	glVertex2f(0.0, 4.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.5, 4.5);
+	glVertex2f(0.0, 5.0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0.0, 5.0);
+	glVertex2f(-0.5, 4.5);
+	glEnd();
+	glFlush();
+
+    for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+//block3 of computer1
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(-4, -0.5);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3.5, 0);
+	glVertex2f(-4, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(-3.5, 0);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3, -0.5);
+	glVertex2f(-3, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(-4, 0.5);
+	glVertex2f(-3.5, 0);
+	glVertex2f(-3, 0.5);
+	glVertex2f(-3.5, 1);
+	glEnd();
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(-4, -0.5);
+	glVertex2f(-3.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, 0);
+	glVertex2f(-4, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-4, 0.5);
+	glVertex2f(-4, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, -1);
+	glVertex2f(-3, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3, -0.5);
+	glVertex2f(-3, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3, 0.5);
+	glVertex2f(-3.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3, 0.5);
+	glVertex2f(-3.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-3.5, 1);
+	glVertex2f(-4, 0.5);
+	glEnd();
+	glFlush();
+
+//block3 of computer2
+	//left
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(7, -0.5);
+	glVertex2f(7.5, -1);
+	glVertex2f(7.5, 0);
+	glVertex2f(7, 0.5);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(7.5, 0);
+	glVertex2f(7.5, -1);
+	glVertex2f(8, -0.5);
+	glVertex2f(8, 0.5);
+	glEnd();
+
+	//top
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);//green
+	glVertex2f(7, 0.5);
+	glVertex2f(7.5, 0);
+	glVertex2f(8, 0.5);
+	glVertex2f(7.5, 1);
+	glEnd();
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	//border
+	glBegin(GL_LINES);
+	glVertex2f(7, -0.5);
+	glVertex2f(7.5, -1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7.5, -1);
+	glVertex2f(7.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7.5, 0);
+	glVertex2f(7, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7, 0.5);
+	glVertex2f(7, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7.5, -1);
+	glVertex2f(8, -0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8, -0.5);
+	glVertex2f(8, 0.5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8, 0.5);
+	glVertex2f(7.5, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(8, 0.5);
+	glVertex2f(7.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(7.5, 1);
+	glVertex2f(7, 0.5);
+	glEnd();
+	glFlush();
 }
 int main(int argc, char **argv)
 {
