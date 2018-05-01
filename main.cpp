@@ -20,7 +20,6 @@ char str9[] = "SURESH PRABHU - 4MT15CS107";
 char str10[] = "Submitted To:";
 char str11[] = "MR. SUNIL KUMAR S";
 char str12[] = "MR. PRASHANTH B.S";
-char strl2[] = "( Press Enter to Continue )";
 char str13[] = "********************************************* MENU *********************************************";
 char str14[] = "Press (1) : Create a Block";
 char str15[] = "Press (2) : Tamper with a Block";
@@ -36,7 +35,7 @@ char str24[] = "Transaction Data";
 char str25[] = "A block records some or all of the most recent Bitcoin transactions that have not yet entered any prior blocks. Thus a block";
 char str26[] = "is like a page of a ledger or record book. Each time a block is 'completed', it gives way to the next block in the blockchain.";
 char str27[] = "------------->";
-char str28[] = "( Press ENTER to go back to the Menu )";
+char str28[] = "( Press ENTER to continue )";
 char str29[] = "TAMPER WITH A BLOCK";
 char str30[] = "Hash: ";
 char str31[] = "Previous Hash: ";
@@ -52,6 +51,9 @@ char str40[] = "1st block is special. It cannot point to previous block because 
 char str41[] = "1";
 char str42[] = "2";
 char str43[] = "3";
+char *str44 = "Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.";
+char *str45 = "In turn, that will make block 3 and all following block invalid because they no longer store a valid hash of the previous block.";
+char *str46 = "So changing a single block will make all following blocks invalid.";
 void *font = GLUT_BITMAP_HELVETICA_18;
 void myKey(unsigned char key, int x, int y);
 
@@ -73,8 +75,8 @@ void DrawEllipse(float x, float y, float radiusX, float radiusY) {
 	glEnd();
 }
 int i;
-//Main Screen : DETAILS
-void display1()
+
+void display1() //Font Screen
 {
 	glClearColor(0, 0, 0, 0); //background color
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -122,13 +124,13 @@ void display1()
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str12[i]);
     glColor3f(1.0,0.0,0.0);
     glRasterPos2f(-1.75,-9);
-    for (i = 0;i<strlen(strl2);i++)
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, strl2[i]);
+    for (i = 0;i<strlen(str28);i++)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str28[i]);
 	glutKeyboardFunc(myKey);
 	glFlush();
 
 }
-void display2()
+void display2() //Menu Screen
 {
 	glClearColor(1, 1, 1, 0); //background color
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -206,7 +208,7 @@ void myKey(unsigned char key, int x, int y) {
 	}
 }
 
-
+/*
 void ProcessMenu(int id) {
     if(id == 1)
         display4intermediate();
@@ -218,8 +220,12 @@ void MouseMenu() {
     glutAddMenuEntry("Tamper Block",1);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
+*/
 // Option 1 screen
 void display3() {
+     glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10, 10, -10, 10);
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT);
 	glRasterPos2f(-8.5, 7);
@@ -470,6 +476,9 @@ void display3() {
 
 void display4()
 {
+     glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(-10, 10, -10, 10);
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT);
 	glRasterPos2f(-8.5, 7);
@@ -856,7 +865,8 @@ void display4()
 	glRasterPos2f(0, 0);
 	glFlush();
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
-	//display4intermediate();
+	//MouseMenu();
+	display4intermediate();
 }
 void display4intermediate()
 {
@@ -865,7 +875,7 @@ void display4intermediate()
 	gluOrtho2D(-10, 10, -10, 10);
 	glClearColor(1, 1, 1, 1); //background color of the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glColor3f(0, 0, 0);
 	glRasterPos2f(-8.5, 7);
 	for (i = 0;i<strlen(str19);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str19[i]); //
@@ -1176,6 +1186,106 @@ void display4intermediate()
 	for (i = 0;i<strlen(str35);i++)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str35[i]); //6BQ1
 	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+//right-side
+	glBegin(GL_QUADS);
+	glColor3f(1,0,0);//red
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glVertex2f(1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+
+	//cube border
+	glColor3f(0, 0, 0);
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(-1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(1.5, 4);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 1);
+	glVertex2f(0, 0);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 0);
+	glVertex2f(1.5, 1);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 3);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 3);
+	glVertex2f(1.5, 4);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(-1.5, 4);
+	glVertex2f(0, 5);
+	glEnd();
+	glBegin(GL_LINES);
+	glVertex2f(0, 5);
+	glVertex2f(1.5, 4);
+	glEnd();
+
+	glFlush();
+
+	glBegin(GL_LINES);
+	glColor3f(1, 0, 0);
+	glVertex2f(1.0, -1.75);
+	glVertex2f(3.0, -1.75);
+	glEnd();
+
+	glRasterPos2f(1.5, -1.25);
+	for (i = 0;i<strlen(str34);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str34[i]); //6BQ1
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	glRasterPos2f(-9, -6.5);
+	for (i = 0;i<strlen(str44);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str44[i]); //Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.
+	glFlush();
+
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+
+	glColor3f(1, 0, 0);
+	DrawEllipse(8, -4, 1, 0.75); //3rd block hash circle
+	glFlush();for (int i = 0; i < 20000; i++) for (int j = 0; j < 10000; j++); //delay
+	glRasterPos2f(-2, -1.5);
+	for (i = 0;i<strlen(str37);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str37[i]);
+	glFlush();
+
+	glColor3f(0, 0, 0);
+	glRasterPos2f(-17, -3.5);
+	for (i = 0;i<strlen(str45);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str45[i]); //In turn, that will make block 3 and all following block invalid because they no longer store a valid hash of the previous block.
+	glFlush();
+
+	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
+
+	glRasterPos2f(-17, -4.5);
+	for (i = 0;i<strlen(str46);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str46[i]); //So changing a single block will make all following blocks invalid.
+	glFlush();
+	glRasterPos2f(-10, -5.5);
+	for (i = 0;i<strlen(str28);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str28[i]); // ( Press `ENTER` to continue )
+	glFlush();
+	glutKeyboardFunc(myKey);
+		for (int i = 0; i < 20000; i++) for (int j = 0; j < 20000; j++); //delay
+
+
 }
 int main(int argc, char **argv)
 {
@@ -1184,7 +1294,6 @@ int main(int argc, char **argv)
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutCreateWindow("Working of BlockChain");
 	glutFullScreen();
-	MouseMenu();
 	glutDisplayFunc(display1); //Call the First Page function
 	glutMainLoop();
 }
