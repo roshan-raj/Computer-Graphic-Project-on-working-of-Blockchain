@@ -210,11 +210,10 @@ void myKey(unsigned char key, int x, int y) {
 	}
 }
 
-/*
+
 void ProcessMenu(int id) {
     if(id == 1)
         display4intermediate();
-    glutPostRedisplay();
 }
 
 void MouseMenu() {
@@ -222,7 +221,7 @@ void MouseMenu() {
     glutAddMenuEntry("Tamper Block",1);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
-*/
+
 // Option 1 screen
 void display3() {
     glMatrixMode(GL_PROJECTION);
@@ -809,8 +808,8 @@ void display4()
 	glRasterPos2f(0, 0);
 	glFlush();
 	for (int i = 0; i < 20000; i++) for (int j = 0; j < 15000; j++); //delay
-	//MouseMenu();
-	display4intermediate();
+	MouseMenu();
+	//display4intermediate();
 }
 void display4intermediate()
 {
@@ -1228,8 +1227,6 @@ void display4intermediate()
 	glFlush();
 	glutKeyboardFunc(myKey);
 		for (int i = 0; i < 20000; i++) for (int j = 0; j < 20000; j++); //delay
-
-
 }
 
 void display5()
