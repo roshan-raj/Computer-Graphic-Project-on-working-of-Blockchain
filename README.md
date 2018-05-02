@@ -1,4 +1,4 @@
-Demonsttration of Blockchain using Graphic System. 
+Demonstration of Blockchain using Graphic System. 
 
 ### Installation Instruction (Ubuntu/Linux)
 
