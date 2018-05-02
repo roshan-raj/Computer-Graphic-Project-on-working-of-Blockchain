@@ -51,10 +51,12 @@ char str40[] = "1st block is special. It cannot point to previous block because 
 char str41[] = "1";
 char str42[] = "2";
 char str43[] = "3";
-char *str44 = "Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.";
-char *str45 = "In turn, that will make block 3 and all following block invalid because they no longer store a valid hash of the previous block.";
-char *str46 = "So changing a single block will make all following blocks invalid.";
-char *str47 = "DISTRIBUTION OF A BLOCK";
+char str44[] = "Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.";
+char str45[] = "In turn, that will make block 3 and all following block invalid because they no longer store a valid hash of the previous block.";
+char str46[] = "So changing a single block will make all following blocks invalid.";
+char str47[] = "DISTRIBUTION OF A BLOCK";
+char str48[] = "Blockchain uses a Peer to Peer network and everyone is allowed to join. When someone joins this network he ";
+char str49[] = "gets a full copy of the BlockChain.";
 void *font = GLUT_BITMAP_HELVETICA_18;
 void myKey(unsigned char key, int x, int y);
 
@@ -1816,7 +1818,20 @@ void display5()
 	glVertex2f(7, 0.5);
 	glEnd();
 	glFlush();
+
+	glColor3f(0, 0, 0);
+	glRasterPos2f(-9, -6.5);
+	for (i = 0;i<strlen(str48);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str48[i]); //Now lets say that you tamper with the 2nd block, this causes the hash of the block to change as well.
+	glFlush();
+
+	glRasterPos2f(-9, -7.5);
+	for (i = 0;i<strlen(str49);i++)
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str49[i]); //Here we have a chain of 3 blocks...
+	glFlush();
+
 }
+
 int main(int argc, char **argv)
 {
 	int window;
